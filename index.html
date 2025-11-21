@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikolaos Pallikarakis - Applied Mathematics & Inverse Problems</title>
+    <style>
+        :root {
+            --color-primary: #1f5b6a;
+            --color-accent: #2fa8b8;
+            --color-bg: #f5f5f5;
+            --color-surface: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-muted: #666;
+            --color-border: #e0e0e0;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 18px;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        nav a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            color: white;
+            padding: 80px var(--spacing-lg);
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero .tagline {
+            font-size: 16px;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Sections */
+        section {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        section h2 {
+            color: var(--color-primary);
+            font-size: 28px;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: var(--spacing-md);
+        }
+
+        /* Research Section */
+        .research-focus {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .research-card {
+            background: var(--color-bg);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .research-card h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .research-card p {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Publications */
+        .publication {
+            padding: var(--spacing-md);
+            border-left: 3px solid var(--color-accent);
+            background: var(--color-bg);
+            margin-bottom: var(--spacing-md);
+            border-radius: 4px;
+        }
+
+        .publication h3 {
+            color: var(--color-primary);
+            font-size: 16px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .publication .authors {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xs);
+            font-style: italic;
+        }
+
+        .publication .status {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-top: var(--spacing-sm);
+        }
+
+        .publication a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .publication a:hover {
+            text-decoration: underline;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .project {
+            background: var(--color-bg);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .project h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project .description {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-md);
+        }
+
+        .tag {
+            background: var(--color-primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: var(--spacing-md);
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .skill-category h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 16px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .skill-category li {
+            padding: var(--spacing-xs) 0;
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+
+        .skill-category li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+
+        .contact p {
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.95;
+        }
+
+        .contact a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .contact a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: white;
+            color: var(--color-primary);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-lg);
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 13px;
+            margin-top: var(--spacing-xl);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .subtitle {
+                font-size: 16px;
+            }
+
+            nav ul {
+                gap: var(--spacing-md);
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            section h2 {
+                font-size: 22px;
+            }
+
+            .container {
+                padding: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1>NP</h1>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Nikolaos Pallikarakis</h1>
+            <p class="subtitle">Applied Mathematics | Inverse Problems | Deep Learning</p>
+            <p class="tagline">PhD Researcher in Computational Electromagnetics & Neural Networks | NTUA</p>
+            <div class="social-links">
+                <a href="https://github.com/npallikarakis" target="_blank">GitHub</a>
+                <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" target="_blank">ResearchGate</a>
+                <a href="https://orcid.org/0000-0002-2385-6747" target="_blank">ORCID</a>
+                <a href="mailto:npall@central.ntua.gr">Email</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="container">
+        <section id="about">
+            <h2>About</h2>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
+                I am a PhD researcher in Applied Mathematics at the <strong>National Technical University of Athens (NTUA)</strong>, specializing in inverse electromagnetic scattering problems and deep learning. My research focuses on developing neural networks for solving complex inverse problems in doubly-connected impedance obstacles, combining rigorous mathematical theory with practical computational methods.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted); margin-top: var(--spacing-md);">
+                With 7+ years of experience in semiconductor metrology and critical dimension measurement, I bring practical insights to computational physics. My work bridges theory, simulation, and machine learning applications, with expertise in numerical methods, signal processing, and scientific computing.
+            </p>
+        </section>
+
+        <!-- Research Focus -->
+        <section id="research">
+            <h2>Research Focus</h2>
+            <div class="research-focus">
+                <div class="research-card">
+                    <h3>Inverse Electromagnetic Scattering</h3>
+                    <p>Shape reconstruction and material property determination from far-field measurements using advanced inverse problem techniques and machine learning approaches.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Deep Learning & Neural Networks</h3>
+                    <p>Designing specialized architectures (circular CNNs, neural operators) for solving PDEs and inverse problems with applications to electromagnetic wave propagation.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Numerical Methods</h3>
+                    <p>Development and analysis of numerical techniques for Maxwell transmission eigenvalue problems, Bessel function expansions, and scientific computing solutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section id="publications">
+            <h2>Publications & Manuscripts</h2>
+            
+            <div class="publication">
+                <h3>Application of Machine Learning Regression Models to Inverse Eigenvalue Problems</h3>
+                <p class="authors">Nikolaos Pallikarakis & Andreas Ntargaras</p>
+                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Explores ML approaches for solving inverse eigenvalue problems in applied mathematics.</p>
+                <span class="status">Published</span>
+                <br>
+                <a href="https://github.com/npallikarakis/ML_inv_eigenvalue" target="_blank">→ Repository & Code</a>
+            </div>
+
+            <div class="publication">
+                <h3>Exploring the Inverse Line-Source Scattering Problem in Dielectric Cylinders with Deep Neural Networks</h3>
+                <p class="authors">Nikolaos Pallikarakis, Andreas Kalogeropoulos & Nikolaos T. Dimitropoulos</p>
+                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Application of deep neural networks to electromagnetic inverse scattering problems in cylindrical geometries.</p>
+                <span class="status">Published</span>
+                <br>
+                <a href="https://github.com/npallikarakis/DNN_inverse_line_source" target="_blank">→ Repository & Code</a>
+            </div>
+
+            <div class="publication">
+                <h3>Inverse Electromagnetic Scattering in Doubly-Connected Impedance Obstacles using Circular CNNs</h3>
+                <p class="authors">Nikolaos Pallikarakis (PhD Dissertation)</p>
+                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Current dissertation work on advanced CNN architectures for complex electromagnetic inverse problems.</p>
+                <span class="status">In Progress</span>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Research Projects & Code</h2>
+            <div class="projects-grid">
+                <div class="project">
+                    <h3>ML Inverse Eigenvalue</h3>
+                    <p class="description">Machine learning models for solving inverse eigenvalue problems. Implementation of regression techniques for parameter recovery from eigenvalue spectra.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">ML</span>
+                        <span class="tag">Inverse Problems</span>
+                    </div>
+                    <a href="https://github.com/npallikarakis/ML_inv_eigenvalue" class="project-link">View on GitHub →</a>
+                </div>
+
+                <div class="project">
+                    <h3>DNN Inverse Line Source</h3>
+                    <p class="description">Deep neural network approach to inverse line-source scattering in dielectric cylinders. Combines numerical methods with deep learning for electromagnetic inverse problems.</p>
+                    <div class="project-tags">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Electromagnetics</span>
+                        <span class="tag">CNN</span>
+                    </div>
+                    <a href="https://github.com/npallikarakis/DNN_inverse_line_source" class="project-link">View on GitHub →</a>
+                </div>
+
+                <div class="project">
+                    <h3>Numerical Methods for Maxwell</h3>
+                    <p class="description">Numerical computation and analysis of transmission eigenvalue problems in Maxwell equations. Implementation of spectral methods and Bessel function expansions.</p>
+                    <div class="project-tags">
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">PDEs</span>
+                        <span class="tag">Numerical Analysis</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <h3>Computer Vision Applications</h3>
+                    <p class="description">Satellite imagery analysis and vehicle detection using CNN-based approaches. Shape recognition and reconstruction from multi-modal data.</p>
+                    <div class="project-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Object Detection</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>Python (Primary)</li>
+                        <li>MATLAB/Octave</li>
+                        <li>LaTeX</li>
+                        <li>JavaScript/HTML</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Deep Learning & ML</h3>
+                    <ul>
+                        <li>TensorFlow/Keras</li>
+                        <li>PyTorch</li>
+                        <li>Scikit-learn</li>
+                        <li>Neural Networks</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Scientific Computing</h3>
+                    <ul>
+                        <li>Numerical Methods</li>
+                        <li>Signal Processing</li>
+                        <li>Differential Equations</li>
+                        <li>Inverse Problems</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <ul>
+                        <li>Google Colab</li>
+                        <li>GitHub</li>
+                        <li>Overleaf</li>
+                        <li>Linux/Unix</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact">
+            <h2>Get In Touch</h2>
+            <p>I'm interested in collaborations, research opportunities, and discussions on inverse problems, deep learning, and scientific computing.</p>
+            <div class="contact-buttons">
+                <a href="mailto:npall@central.ntua.gr" class="btn">Email Me</a>
+                <a href="https://github.com/npallikarakis" class="btn">GitHub</a>
+                <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" class="btn">ResearchGate</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" style="color: var(--color-text-muted);">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" style="color: var(--color-text-muted);">ResearchGate</a></p>
+    </footer>
+</body>
+</html>
