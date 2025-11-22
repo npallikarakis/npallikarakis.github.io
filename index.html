@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nikolaos Pallikarakis - Applied Mathematics & Inverse Problems</title>
+    <!-- Firebase Configuration -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"></script>
+
+    
     <style>
         :root {
             --color-primary: #1f5b6a;
@@ -1134,10 +1139,14 @@
                 <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" target="_blank">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" target="_blank">ResearchGate</a> | <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" target="_blank">LinkedIn</a></p>
             </div>
             <div style="font-size: 12px;">
-                Visitors: <span id="visitor-count" style="font-weight: bold;">--</span> | <span id="visitor-country" style="font-weight: bold;">--</span>
+                👥 Visitors: <span id="visitor-count" style="font-weight: bold;">--</span> | 🌍 <span id="visitor-country" style="font-weight: bold;">--</span> | <a href="#" onclick="showPage('analytics'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: 500;">Analytics</a>
             </div>
         </div>
     </footer>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"></script>
 
     <script>
         // Page navigation
@@ -1189,25 +1198,101 @@
             }
         }
 
-        // Visitor Counter
+        // Firebase Configuration - REPLACE WITH YOUR OWN CONFIG
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_AUTH_DOMAIN.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         async function loadVisitorCounter() {
             try {
-                const response = await fetch('https://api.countapi.xyz/hit/npallikarakis.github.io/visits');
-                const data = await response.json();
-                document.getElementById('visitor-count').textContent = data.value;
-
+                // Get current visitor location
                 const geoResponse = await fetch('https://ipapi.co/json/');
                 const geoData = await geoResponse.json();
                 const country = geoData.country_name || geoData.country || 'Unknown';
-                document.getElementById('visitor-country').textContent = '📍 ' + country;
+                const city = geoData.city || '';
+                const location = city ? `${city}, ${country}` : country;
+
+                // Log visitor to Firebase
+                const visitorRef = db.ref('visitors').push();
+                visitorRef.set({
+                    country: country,
+                    city: city,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent.substring(0, 100)
+                });
+
+                document.getElementById('visitor-country').textContent = '📍 ' + location;
+
+                // Read all visitors from Firebase
+                db.ref('visitors').on('value', (snapshot) => {
+                    const visitors = snapshot.val() || {};
+                    const visitorArray = Object.values(visitors);
+                    const totalVisits = visitorArray.length;
+
+                    document.getElementById('visitor-count').textContent = totalVisits;
+                    document.getElementById('total-visits').textContent = totalVisits;
+
+                    // Calculate distribution by country
+                    const distribution = {};
+                    visitorArray.forEach(visitor => {
+                        const c = visitor.country || 'Unknown';
+                        distribution[c] = (distribution[c] || 0) + 1;
+                    });
+
+                    updateVisitorTable(distribution);
+
+                    // Update timestamp
+                    const now = new Date();
+                    document.getElementById('last-update').textContent = now.toLocaleString();
+                });
+
             } catch (error) {
-                console.log('Counter service unavailable', error);
-                document.getElementById('visitor-count').textContent = '1';
-                document.getElementById('visitor-country').textContent = '📍 Earth';
+                console.log('Error loading visitor counter', error);
+                document.getElementById('visitor-count').textContent = '0';
+                document.getElementById('visitor-country').textContent = '📍 Unknown';
             }
+        }
+
+        function updateVisitorTable(distribution) {
+            const tbody = document.getElementById('visitor-table');
+            if (!tbody) return; // Exit if analytics page not loaded yet
+
+            tbody.innerHTML = '';
+
+            const total = Object.values(distribution).reduce((a, b) => a + b, 0);
+            const sorted = Object.entries(distribution)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 20);
+
+            const uniqueCountries = sorted.length;
+            const uniqueElement = document.getElementById('unique-countries');
+            if (uniqueElement) uniqueElement.textContent = uniqueCountries;
+
+            sorted.forEach(([country, count]) => {
+                const percentage = ((count / total) * 100).toFixed(1);
+                const row = `
+                    <tr style="border-bottom: 1px solid var(--color-border);">
+                        <td style="padding: var(--spacing-md); color: var(--color-text);">${country}</td>
+                        <td style="padding: var(--spacing-md); text-align: center; color: var(--color-primary); font-weight: 500;">${count}</td>
+                        <td style="padding: var(--spacing-md); text-align: center; color: var(--color-text-muted);">${percentage}%</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
         }
 
         window.addEventListener('load', loadVisitorCounter);
     </script>
 </body>
 </html>
+
