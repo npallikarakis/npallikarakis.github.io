@@ -423,11 +423,17 @@
     <div class="hero">
         <div class="container">
             <h1>Nikolaos Pallikarakis</h1>
-            <p class="subtitle">Applied Mathematics | Inverse Problems | Deep Learning</p>
-            <p class="tagline">PhD Researcher in Computational Electromagnetics & Neural Networks | NTUA</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-lg); flex-wrap: wrap;">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ca2453be-9f1a-4041-87b2-18102a7ae4d7" alt="Nikolaos Pallikarakis" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); object-fit: cover;">
+                <div style="text-align: left;">
+                    <p class="subtitle">Mathematics | Computation | Real-world Impact</p>
+                    <p class="tagline">Applied Mathematician bridging academia and industry</p>
+                </div>
+            </div>
             <div class="social-links">
                 <a href="https://github.com/npallikarakis" target="_blank">GitHub</a>
                 <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" target="_blank">ResearchGate</a>
+                <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" target="_blank">LinkedIn</a>
                 <a href="https://orcid.org/0000-0002-2385-6747" target="_blank">ORCID</a>
                 <a href="mailto:npall@central.ntua.gr">Email</a>
             </div>
@@ -439,10 +445,10 @@
         <section id="about">
             <h2>About</h2>
             <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
-                I bridge <strong>theoretical mathematics and industrial applications</strong>, combining rigorous academic research with practical engineering expertise. As a <strong>PhD in Applied Mathematics</strong> and <strong>Senior Data Scientist at n&k Technology</strong>, I solve complex inverse problems using deep learning and numerical methods for both scientific discovery and semiconductor manufacturing optimization.
+                I am an applied mathematician passionate about solving complex real-world problems through rigorous mathematical theory and computational methods. With a PhD in Applied/Computational Mathematics from NTUA and 13+ years of combined experience in academia and industry, I work at the intersection of mathematics and technology. My expertise spans <strong>inverse problems, deep learning, numerical methods, and scientific computing</strong>, with applications in electromagnetics and semiconductor metrology.
             </p>
             <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted); margin-top: var(--spacing-md);">
-                My research spans <strong>inverse electromagnetic scattering, machine learning architectures, and numerical methods for PDEs</strong>. With 13+ years of combined academic and industry experience—including 7+ years at n&k Technology and 4+ years in postdoctoral research and teaching—I bring unique expertise at the intersection of theory and application. My work addresses real-world semiconductor metrology challenges while advancing fundamental mathematical theory.
+                Currently, I work as a Senior Application Engineer and Data Scientist at n&k Technology while continuing postdoctoral research. I am driven by bridging the gap between theoretical mathematics and practical applications, whether optimizing semiconductor manufacturing or advancing fundamental computational methods. I believe mathematics is most powerful when applied thoughtfully to real problems.
             </p>
             <div style="display: flex; gap: var(--spacing-lg); margin-top: var(--spacing-lg); flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 200px; background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
@@ -799,7 +805,39 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" style="color: var(--color-text-muted);">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" style="color: var(--color-text-muted);">ResearchGate</a></p>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);">
+            <div>
+                <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" style="color: var(--color-text-muted);">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" style="color: var(--color-text-muted);">ResearchGate</a> | <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" style="color: var(--color-text-muted);">LinkedIn</a></p>
+            </div>
+            <div style="font-size: 12px; color: var(--color-text-muted);">
+                Visitors: <span id="visitor-count" style="font-weight: bold;">--</span> | <span id="visitor-country" style="font-weight: bold;">--</span>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Visitor Counter with Country Detection
+        async function loadVisitorCounter() {
+            try {
+                // Get visitor count from CounterAPI
+                const response = await fetch('https://api.countapi.xyz/hit/npallikarakis.github.io/visits');
+                const data = await response.json();
+                document.getElementById('visitor-count').textContent = data.value;
+
+                // Get visitor country from IP geolocation
+                const geoResponse = await fetch('https://ipapi.co/json/');
+                const geoData = await geoResponse.json();
+                const country = geoData.country_name || geoData.country || 'Unknown';
+                document.getElementById('visitor-country').textContent = '📍 ' + country;
+            } catch (error) {
+                console.log('Counter service unavailable', error);
+                document.getElementById('visitor-count').textContent = '1';
+                document.getElementById('visitor-country').textContent = '📍 Earth';
+            }
+        }
+
+        // Load counter when page loads
+        window.addEventListener('load', loadVisitorCounter);
+    </script>
 </body>
 </html>
