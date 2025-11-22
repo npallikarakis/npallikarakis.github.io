@@ -50,29 +50,39 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         nav h1 {
             font-size: 18px;
             color: var(--color-primary);
             font-weight: 600;
+            margin-right: var(--spacing-lg);
         }
 
         nav ul {
             list-style: none;
             display: flex;
             gap: var(--spacing-lg);
+            flex-wrap: wrap;
         }
 
-        nav a {
+        nav button {
+            background: none;
+            border: none;
             color: var(--color-text-muted);
-            text-decoration: none;
             font-size: 14px;
+            cursor: pointer;
             transition: color 0.3s;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 4px;
+            font-family: inherit;
         }
 
-        nav a:hover {
+        nav button:hover,
+        nav button.active {
             color: var(--color-accent);
+            background: rgba(47, 168, 184, 0.1);
         }
 
         /* Container */
@@ -132,6 +142,15 @@
             background: rgba(255,255,255,0.3);
         }
 
+        /* Page sections */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
         /* Sections */
         section {
             background: var(--color-surface);
@@ -149,136 +168,113 @@
             padding-bottom: var(--spacing-md);
         }
 
-        /* Research Section */
-        .research-focus {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
+        section h3 {
+            color: var(--color-primary);
+            font-size: 18px;
             margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
         }
 
-        .research-card {
+        /* Subsections */
+        .subsection {
             background: var(--color-bg);
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             border-radius: 8px;
+            margin-bottom: var(--spacing-lg);
             border-left: 4px solid var(--color-accent);
         }
 
-        .research-card h3 {
+        .subsection h4 {
             color: var(--color-primary);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: 16px;
         }
 
-        .research-card p {
-            font-size: 14px;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-
-        /* Publications */
-        .publication {
-            padding: var(--spacing-md);
-            border-left: 3px solid var(--color-accent);
+        /* Publication / presentation item */
+        .pub-item {
             background: var(--color-bg);
+            padding: var(--spacing-md);
             margin-bottom: var(--spacing-md);
             border-radius: 4px;
+            border-left: 3px solid var(--color-accent);
         }
 
-        .publication h3 {
+        .pub-item h4 {
             color: var(--color-primary);
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: var(--spacing-sm);
         }
 
-        .publication .authors {
+        .pub-item .authors {
             font-size: 13px;
             color: var(--color-text-muted);
             margin-bottom: var(--spacing-xs);
             font-style: italic;
         }
 
-        .publication .status {
+        .pub-item .journal {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pub-item a {
+            display: inline-block;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 13px;
+            margin-right: var(--spacing-md);
+        }
+
+        .pub-item a:hover {
+            text-decoration: underline;
+        }
+
+        .pub-item .status {
             display: inline-block;
             background: var(--color-accent);
             color: white;
             padding: 2px 8px;
             border-radius: 3px;
-            font-size: 12px;
-            margin-top: var(--spacing-sm);
+            font-size: 11px;
         }
 
-        .publication a {
-            color: var(--color-accent);
-            text-decoration: none;
-            font-size: 13px;
+        /* Experience items */
+        .exp-item {
+            border-left: 3px solid var(--color-accent);
+            padding-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
         }
 
-        .publication a:hover {
-            text-decoration: underline;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
-        }
-
-        .project {
-            background: var(--color-bg);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            border: 1px solid var(--color-border);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .project h3 {
+        .exp-item h3 {
             color: var(--color-primary);
             margin-bottom: var(--spacing-sm);
         }
 
-        .project .description {
+        .exp-item .company {
             font-size: 14px;
             color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .exp-item .period {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .exp-item ul {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-md);
+            padding-left: var(--spacing-lg);
+        }
+
+        .exp-item li {
             margin-bottom: var(--spacing-sm);
             line-height: 1.6;
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-            margin-top: var(--spacing-md);
-        }
-
-        .tag {
-            background: var(--color-primary);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-
-        .project-link {
-            display: inline-block;
-            margin-top: var(--spacing-md);
-            color: var(--color-accent);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Skills */
+        /* Skills grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -286,30 +282,28 @@
             margin-top: var(--spacing-lg);
         }
 
-        .skill-category h3 {
+        .skill-category {
+            background: var(--color-bg);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border-top: 3px solid var(--color-accent);
+        }
+
+        .skill-category h4 {
             color: var(--color-primary);
             margin-bottom: var(--spacing-sm);
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .skill-category ul {
             list-style: none;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--color-text-muted);
         }
 
         .skill-category li {
             padding: var(--spacing-xs) 0;
-            padding-left: var(--spacing-md);
-            position: relative;
-        }
-
-        .skill-category li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--color-accent);
-            font-weight: bold;
+            line-height: 1.6;
         }
 
         /* Contact Section */
@@ -325,19 +319,7 @@
         }
 
         .contact p {
-            margin-bottom: var(--spacing-lg);
             opacity: 0.95;
-        }
-
-        .contact a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .contact a:hover {
-            opacity: 0.8;
         }
 
         .contact-buttons {
@@ -345,6 +327,7 @@
             gap: var(--spacing-md);
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
         }
 
         .btn {
@@ -355,8 +338,8 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
-            transition: transform 0.3s;
             display: inline-block;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
@@ -374,6 +357,42 @@
             margin-top: var(--spacing-xl);
         }
 
+        footer a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--color-accent);
+        }
+
+        /* About highlights */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .highlight-box {
+            background: var(--color-bg);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .highlight-box strong {
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -384,11 +403,23 @@
                 font-size: 16px;
             }
 
-            nav ul {
-                gap: var(--spacing-md);
+            nav .container {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            nav a {
+            nav h1 {
+                margin-right: 0;
+                margin-bottom: var(--spacing-md);
+            }
+
+            nav ul {
+                width: 100%;
+                gap: var(--spacing-sm);
+            }
+
+            nav button {
+                padding: var(--spacing-xs) var(--spacing-sm);
                 font-size: 12px;
             }
 
@@ -408,23 +439,22 @@
         <div class="container">
             <h1>NP</h1>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><button class="nav-btn active" onclick="showPage('about')">About</button></li>
+                <li><button class="nav-btn" onclick="showPage('research')">Research</button></li>
+                <li><button class="nav-btn" onclick="showPage('experience')">Experience</button></li>
+                <li><button class="nav-btn" onclick="showPage('skills')">Skills</button></li>
+                <li><button class="nav-btn" onclick="showPage('learning')">Lifelong Learning</button></li>
+                <li><button class="nav-btn" onclick="showPage('contact')">Contact</button></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Always visible) -->
     <div class="hero">
         <div class="container">
             <h1>Nikolaos Pallikarakis</h1>
             <div style="display: flex; align-items: center; justify-content: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-lg); flex-wrap: wrap;">
-                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ca2453be-9f1a-4041-87b2-18102a7ae4d7" alt="Nikolaos Pallikarakis" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); object-fit: cover;">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ca2453be-9f1a-4041-87b2-18102a7ae4d7" alt="Nikolaos Pallikarakis" style="width: 140px; height: 140px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); object-fit: cover;">
                 <div style="text-align: left;">
                     <p class="subtitle">Mathematics | Computation | Real-world Impact</p>
                     <p class="tagline">Applied Mathematician bridging academia and industry</p>
@@ -440,391 +470,574 @@
         </div>
     </div>
 
-    <!-- About Section -->
-    <div class="container">
-        <section id="about">
-            <h2>About</h2>
-            <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
-                I am an applied mathematician passionate about solving complex real-world problems through rigorous mathematical theory and computational methods. With a PhD in Applied/Computational Mathematics from NTUA and 13+ years of combined experience in academia and industry, I work at the intersection of mathematics and technology. My expertise spans <strong>inverse problems, deep learning, numerical methods, and scientific computing</strong>, with applications in electromagnetics and semiconductor metrology.
-            </p>
-            <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted); margin-top: var(--spacing-md);">
-                Currently, I work as a Senior Application Engineer and Data Scientist at n&k Technology while continuing postdoctoral research. I am driven by bridging the gap between theoretical mathematics and practical applications, whether optimizing semiconductor manufacturing or advancing fundamental computational methods. I believe mathematics is most powerful when applied thoughtfully to real problems.
-            </p>
-            <div style="display: flex; gap: var(--spacing-lg); margin-top: var(--spacing-lg); flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px; background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
-                    <strong style="color: var(--color-primary);">Industry Experience</strong>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);">Senior Application Engineer at n&k Technology. Semiconductor metrology, RCWA modeling, ML for optical measurements.</p>
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page active">
+        <div class="container">
+            <section>
+                <h2>About</h2>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted);">
+                    I am an applied mathematician passionate about solving complex real-world problems through rigorous mathematical theory and computational methods. With a PhD in Applied/Computational Mathematics from NTUA and 13+ years of combined experience in academia and industry, I work at the intersection of mathematics and technology. My expertise spans <strong>inverse problems, deep learning, numerical methods, and scientific computing</strong>, with applications in electromagnetics and semiconductor metrology.
+                </p>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted); margin-top: var(--spacing-md);">
+                    Currently, I work as a Senior Application Engineer and Data Scientist at n&k Technology while continuing postdoctoral research. I am driven by bridging the gap between theoretical mathematics and practical applications, whether optimizing semiconductor manufacturing or advancing fundamental computational methods. I believe mathematics is most powerful when applied thoughtfully to real problems.
+                </p>
+                <div class="highlights">
+                    <div class="highlight-box">
+                        <strong>Industry Experience</strong>
+                        <p>Senior Application Engineer at n&k Technology. Semiconductor metrology, RCWA modeling, ML for optical measurements.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>Academic Research</strong>
+                        <p>PhD Applied Mathematics. Inverse problems, deep learning, transmission eigenvalues, electromagnetic scattering.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>Teaching & Mentoring</strong>
+                        <p>Teaching assistant & tutor at NTUA. Differential equations, numerical methods, mathematical analysis.</p>
+                    </div>
                 </div>
-                <div style="flex: 1; min-width: 200px; background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
-                    <strong style="color: var(--color-primary);">Academic Research</strong>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);">PhD Applied Mathematics. Inverse problems, deep learning, transmission eigenvalues, electromagnetic scattering.</p>
-                </div>
-                <div style="flex: 1; min-width: 200px; background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
-                    <strong style="color: var(--color-primary);">Teaching & Mentoring</strong>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);">Teaching assistant & tutor at NTUA. Differential equations, numerical methods, mathematical analysis.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
+    </div>
 
-        <!-- Research Focus -->
-        <section id="research">
-            <h2>Research Focus</h2>
-            <div class="research-focus">
-                <div class="research-card">
-                    <h3>Inverse Electromagnetic Scattering</h3>
-                    <p>Shape reconstruction and material property determination from far-field measurements using advanced inverse problem techniques and machine learning approaches.</p>
-                </div>
-                <div class="research-card">
-                    <h3>Deep Learning & Neural Networks</h3>
-                    <p>Designing specialized architectures (circular CNNs, neural operators) for solving PDEs and inverse problems with applications to electromagnetic wave propagation.</p>
-                </div>
-                <div class="research-card">
-                    <h3>Numerical Methods</h3>
-                    <p>Development and analysis of numerical techniques for Maxwell transmission eigenvalue problems, Bessel function expansions, and scientific computing solutions.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications -->
-        <section id="publications">
-            <h2>Publications & Presentations</h2>
-            <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">Selected publications (7 in top-tier journals). <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" style="color: var(--color-accent);">Full list on Google Scholar</a></p>
-            
-            <div class="publication">
-                <h3>Estimating Properties of a Homogeneous Bounded Soil Using Machine Learning Models</h3>
-                <p class="authors">K. Kalimeris, L. Mindrinos, and Pallikarakis, N.</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Communications on Analysis and Computation</em>, 6, 62–93, 2025</p>
-                <a href="https://doi.org/10.3934/cac.2025019" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.3934/cac.2025019</a>
-            </div>
-
-            <div class="publication">
-                <h3>DUV-Vis-IR Optical Metrology Enhancements with Machine Learning</h3>
-                <p class="authors">J. Roberts, A. Ntargaras, Pallikarakis, N., K. Florios, and M. Colli</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>36th Annual SEMI Advanced Semiconductor Manufacturing Conference (ASMC)</em>, Albany, NY, USA, 2025</p>
-                <a href="https://doi.org/10.1109/ASMC64512.2025.11010784" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1109/ASMC64512.2025.11010784</a>
-                <span class="status" style="margin-left: var(--spacing-sm);">Industry & Academia</span>
-            </div>
-
-            <div class="publication">
-                <h3>A Review on the Direct and Inverse Transmission Eigenvalue Problem for the Spherically Symmetric Refractive Index</h3>
-                <p class="authors">Pallikarakis, N.</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Boletín de la Sociedad Matemática Mexicana</em>, 30, 92, 2024 (invited review article)</p>
-                <a href="https://doi.org/10.1007/s40590-024-00661-0" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1007/s40590-024-00661-0</a>
-            </div>
-
-            <div class="publication">
-                <h3>Exploring the Inverse Line-Source Scattering Problem in Dielectric Cylinders with Deep Neural Networks</h3>
-                <p class="authors">Pallikarakis, N., A. Kalogeropoulos, and N. L. Tsitsas</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Physica Scripta</em>, 99, 116013, 2024 (corresponding author)</p>
-                <a href="https://doi.org/10.1088/1402-4896/ad852c" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1088/1402-4896/ad852c</a> | <a href="https://github.com/npallikarakis/DNN_inverse_line_source" target="_blank" style="color: var(--color-accent); font-size: 13px;">Code →</a>
-            </div>
-
-            <div class="publication">
-                <h3>Application of Machine Learning Regression Models to Inverse Eigenvalue Problems</h3>
-                <p class="authors">Pallikarakis, N. and A. Ntargaras</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Computers and Mathematics with Applications</em>, 154, 162–174, 2024 (corresponding author)</p>
-                <a href="https://doi.org/10.1016/j.camwa.2023.11.038" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1016/j.camwa.2023.11.038</a> | <a href="https://github.com/npallikarakis/ML_inv_eigenvalue" target="_blank" style="color: var(--color-accent); font-size: 13px;">Code →</a>
-            </div>
-
-            <div class="publication">
-                <h3>Uniqueness of a Spherically Symmetric Refractive Index from Modified Transmission Eigenvalues</h3>
-                <p class="authors">D. Gintides, Pallikarakis, N., and K. Stratouras</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Inverse Problems</em>, 38, 085010, 2022 (corresponding author)</p>
-                <a href="https://doi.org/10.1088/1361-6420/ac7b3f" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1088/1361-6420/ac7b3f</a>
-            </div>
-
-            <div class="publication">
-                <h3>A Computational Method for the Inverse Transmission Eigenvalue Problem</h3>
-                <p class="authors">D. Gintides and Pallikarakis, N.</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"><em>Inverse Problems</em>, 29, 104010, 2013</p>
-                <a href="https://doi.org/10.1088/0266-5611/29/10/104010" target="_blank" style="color: var(--color-accent); font-size: 13px;">DOI: 10.1088/0266-5611/29/10/104010</a>
-            </div>
-
-            <h3 style="color: var(--color-primary); margin-top: var(--spacing-lg); font-size: 18px;">Invited Presentations & Conferences (selected)</h3>
-            <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-top: var(--spacing-md);">
-                <li><strong>2025 SEMI Advanced Semiconductor Manufacturing Conference (ASMC)</strong>, Albany, NY (May 2025) - Talk: "DUV-Vis-IR Optical Metrology Enhancements with Machine Learning"</li>
-                <li><strong>Seminar on Analysis, Differential Equations and Mathematical Physics</strong>, Online (March 2025) - Invited Talk: "Direct and Inverse Spherically Symmetric Transmission Eigenvalue Problems: Past, Present, and Future"</li>
-                <li><strong>Numerical Analysis Seminars, UniBo</strong>, University of Bologna, Italy (May 2024) - Invited Talk: "Numerical solution of inverse eigenvalue and inverse source problems"</li>
-                <li><strong>IEEE International Symposium on Antennas and Propagation</strong>, Florence, Italy (July 2024) - Talk: "Predicting the number of line sources inside a cylinder using classification neural networks"</li>
-                <li><strong>SEMI CON West</strong>, California, USA (July 2024) - Poster: "DUV-Vis-NIR OCD Metrology utilizing Machine Learning for BCD Semiconductor Manufacturing"</li>
-                <li><strong>11th Applied Inverse Problems Conference (AIP)</strong>, Göttingen, Germany (Sept 2023)</li>
-                <li><strong>International Conference: Modern Mathematical Methods in Science and Technology (M3ST)</strong>, Kalamata, Greece (Aug-Sept 2015)</li>
-                <li><strong>7th International Conference Inverse Problems: Modeling and Simulation (IPMS)</strong>, Fethiye, Turkey (May 2014)</li>
-            </ul>
-        </section>
-
-        <!-- Education -->
-        <section id="education">
-            <h2>Education</h2>
-            
-            <div style="display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-lg); flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 300px; background: var(--color-bg); padding: var(--spacing-lg); border-radius: 8px; border-top: 4px solid var(--color-accent);">
-                    <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">PhD in Applied Mathematics</h3>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>National Technical University of Athens (NTUA)</strong></p>
-                    <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Sep 2012 – Apr 2017</p>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Thesis:</strong> "The inverse spectral problem for the reconstruction of the refractive index from the interior transmission problem"</p>
-                    <p style="font-size: 13px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+    <!-- RESEARCH PAGE -->
+    <div id="research" class="page">
+        <div class="container">
+            <section>
+                <h2>Research</h2>
+                
+                <h3>Research Interests</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                    <div class="subsection">
+                        <h4>Inverse Electromagnetic Scattering</h4>
+                        <p style="font-size: 14px; color: var(--color-text-muted);">Shape reconstruction and material property determination from far-field measurements using advanced inverse problem techniques and machine learning approaches.</p>
+                    </div>
+                    <div class="subsection">
+                        <h4>Deep Learning & Neural Networks</h4>
+                        <p style="font-size: 14px; color: var(--color-text-muted);">Designing specialized architectures (circular CNNs, neural operators) for solving PDEs and inverse problems with applications to electromagnetic wave propagation.</p>
+                    </div>
+                    <div class="subsection">
+                        <h4>Numerical Methods</h4>
+                        <p style="font-size: 14px; color: var(--color-text-muted);">Development and analysis of numerical techniques for Maxwell transmission eigenvalue problems, Bessel function expansions, and scientific computing solutions.</p>
+                    </div>
                 </div>
 
-                <div style="flex: 1; min-width: 300px; background: var(--color-bg); padding: var(--spacing-lg); border-radius: 8px; border-top: 4px solid var(--color-accent);">
-                    <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">MSc in Applied Mathematical Sciences</h3>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>NTUA</strong></p>
-                    <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Sep 2010 – May 2012</p>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Grade:</strong> 9.3/10 (Excellent)</p>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Thesis:</strong> "The interior transmission problem in inverse scattering and applications"</p>
-                    <p style="font-size: 13px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+                <!-- PUBLICATIONS SUBSECTION -->
+                <h3>Publications (12 Published Papers)</h3>
+                <div class="pub-item">
+                    <h4>1. Estimating properties of a homogeneous bounded soil using machine learning models</h4>
+                    <p class="authors">K. Kalimeris, L. Mindrinos, and Pallikarakis, N.</p>
+                    <p class="journal"><em>Communications on Analysis and Computation</em>, 6, 62–93, 2025</p>
+                    <a href="https://doi.org/10.3934/cac.2025019" target="_blank">DOI: 10.3934/cac.2025019</a>
                 </div>
 
-                <div style="flex: 1; min-width: 300px; background: var(--color-bg); padding: var(--spacing-lg); border-radius: 8px; border-top: 4px solid var(--color-accent);">
-                    <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">Diploma in Applied Mathematics and Physical Sciences</h3>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>NTUA</strong></p>
-                    <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);">Sep 2005 – June 2010</p>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Grade:</strong> 7.9/10 (Very Good)</p>
-                    <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Thesis:</strong> "Integral equations and representations in linear elasticity"</p>
-                    <p style="font-size: 13px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+                <div class="pub-item">
+                    <h4>2. DUV-Vis-IR Optical Metrology Enhancements with Machine Learning</h4>
+                    <p class="authors">J. Roberts, A. Ntargaras, Pallikarakis, N., K. Florios, and M. Colli</p>
+                    <p class="journal"><em>36th Annual SEMI Advanced Semiconductor Manufacturing Conference (ASMC)</em>, Albany, NY, USA, 2025, pp. 1-5</p>
+                    <a href="https://doi.org/10.1109/ASMC64512.2025.11010784" target="_blank">DOI: 10.1109/ASMC64512.2025.11010784</a>
+                    <span class="status">Industry & Academia</span>
                 </div>
-            </div>
 
-            <h3 style="color: var(--color-primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-size: 18px;">Awards & Scholarships</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
-                <div style="background: var(--color-bg); padding: var(--spacing-md); border-left: 3px solid var(--color-accent); border-radius: 4px;">
-                    <p style="font-size: 14px; color: var(--color-text-muted);"><strong>ELKE NTUA Scholarship</strong> (2013–2017)<br><span style="font-size: 13px;">4-year PhD scholarship</span></p>
+                <div class="pub-item">
+                    <h4>3. A review on the direct and inverse transmission eigenvalue problem for the spherically symmetric refractive index</h4>
+                    <p class="authors">Pallikarakis, N.</p>
+                    <p class="journal"><em>Boletín de la Sociedad Matemática Mexicana</em>, 30, 92, 2024 (invited review article)</p>
+                    <a href="https://doi.org/10.1007/s40590-024-00661-0" target="_blank">DOI: 10.1007/s40590-024-00661-0</a>
                 </div>
-                <div style="background: var(--color-bg); padding: var(--spacing-md); border-left: 3px solid var(--color-accent); border-radius: 4px;">
-                    <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Thomaidio Award</strong> (2014, 2017)<br><span style="font-size: 13px;">For publications in SCI-indexed journals</span></p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Work Experience -->
-        <section id="experience">
-            <h2>Work Experience</h2>
-            
-            <div style="border-left: 3px solid var(--color-accent); padding-left: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
-                <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">Senior Application Engineer and Data Scientist</h3>
-                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>n&k Technology, Inc.</strong>, San Jose, California, USA</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Nov 2018 – Present (6+ years)</p>
-                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8;">
-                    <li>Analyze raw reflectance/transmittance data and develop ML models using proprietary analysis software (GUI/API)</li>
-                    <li>Apply RCWA (Rigorous Coupled-Wave Analysis) and machine/statistical learning for optical semiconductor metrology</li>
-                    <li>Program in C++ and Python for data processing, automation, and model deployment</li>
-                    <li>Work on non-destructive testing of semiconductor devices; bridge theory and practical manufacturing needs</li>
+                <div class="pub-item">
+                    <h4>4. Exploring the inverse line-source scattering problem in dielectric cylinders with deep neural networks</h4>
+                    <p class="authors">Pallikarakis, N., A. Kalogeropoulos, and N. L. Tsitsas</p>
+                    <p class="journal"><em>Physica Scripta</em>, 99, 116013, 2024 (corresponding author)</p>
+                    <a href="https://doi.org/10.1088/1402-4896/ad852c" target="_blank">DOI: 10.1088/1402-4896/ad852c</a> | <a href="https://github.com/npallikarakis/DNN_inverse_line_source" target="_blank">Code →</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>5. Predicting the number of line sources inside a cylinder using classification neural networks</h4>
+                    <p class="authors">Pallikarakis, N., A. Kalogeropoulos, and N. L. Tsitsas</p>
+                    <p class="journal"><em>2024 IEEE International Symposium on Antennas and Propagation and INC/USNC-URSI Radio Science Meeting (AP-S/INC-USNC-URSI)</em>, Firenze, Italy, 2024, pp. 675-676</p>
+                    <a href="https://doi.org/10.1109/AP-S/INC-USNC-URSI52054.2024.10687110" target="_blank">DOI: 10.1109/AP-S/INC-USNC-URSI52054.2024.10687110</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>6. Application of machine learning regression models to inverse eigenvalue problems</h4>
+                    <p class="authors">Pallikarakis, N. and A. Ntargaras</p>
+                    <p class="journal"><em>Computers and Mathematics with Applications</em>, 154, 162–174, 2024 (corresponding author)</p>
+                    <a href="https://doi.org/10.1016/j.camwa.2023.11.038" target="_blank">DOI: 10.1016/j.camwa.2023.11.038</a> | <a href="https://github.com/npallikarakis/ML_inv_eigenvalue" target="_blank">Code →</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>7. Analysis of the transmission eigenvalue problem with two conductivity parameters</h4>
+                    <p class="authors">Ceja Ayala, R., I. Harris, A. Kleefeld, and Pallikarakis, N.</p>
+                    <p class="journal"><em>Applicable Analysis</em>, 103, 211–239, 2023</p>
+                    <a href="https://doi.org/10.1080/00036811.2023.2181167" target="_blank">DOI: 10.1080/00036811.2023.2181167</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>8. Uniqueness of a spherically symmetric refractive index from modified transmission eigenvalues</h4>
+                    <p class="authors">Gintides, D., Pallikarakis, N., and K. Stratouras</p>
+                    <p class="journal"><em>Inverse Problems</em>, 38, 085010, 2022 (corresponding author)</p>
+                    <a href="https://doi.org/10.1088/1361-6420/ac7b3f" target="_blank">DOI: 10.1088/1361-6420/ac7b3f</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>9. On the modified transmission eigenvalue problem with an artificial metamaterial background</h4>
+                    <p class="authors">Gintides, D., Pallikarakis, N., and K. Stratouras</p>
+                    <p class="journal"><em>Research in the Mathematical Sciences</em>, 8, 2021</p>
+                    <a href="https://doi.org/10.1007/s40687-021-00278-z" target="_blank">DOI: 10.1007/s40687-021-00278-z</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>10. A computational approach for the inverse problem of reconstructing a spherically symmetric refractive index using modified transmission eigenvalues</h4>
+                    <p class="authors">Gintides, D., Pallikarakis, N., and K. Stratouras</p>
+                    <p class="journal"><em>34th General Assembly and Scientific Symp. Int. Union of Radio Science (URSI GASS)</em>, 2021</p>
+                    <a href="https://doi.org/10.23919/URSIGASS51995.2021.9560389" target="_blank">DOI: 10.23919/URSIGASS51995.2021.9560389</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>11. The inverse transmission eigenvalue problem for a discontinuous refractive index</h4>
+                    <p class="authors">Gintides, D. and Pallikarakis, N.</p>
+                    <p class="journal"><em>Inverse Problems</em>, 33, 055006, 2017</p>
+                    <a href="https://doi.org/10.1088/1361-6420/aa5bf0" target="_blank">DOI: 10.1088/1361-6420/aa5bf0</a>
+                </div>
+
+                <div class="pub-item">
+                    <h4>12. A computational method for the inverse transmission eigenvalue problem</h4>
+                    <p class="authors">Gintides, D. and Pallikarakis, N.</p>
+                    <p class="journal"><em>Inverse Problems</em>, 29, 104010, 2013</p>
+                    <a href="https://doi.org/10.1088/0266-5611/29/10/104010" target="_blank">DOI: 10.1088/0266-5611/29/10/104010</a>
+                </div>
+
+                <!-- WORKING PAPERS -->
+                <h3>Working Papers (Under Review)</h3>
+                <div class="pub-item">
+                    <h4>1. Neumann series of Bessel functions in direct and inverse spherically symmetric transmission eigenvalue problems</h4>
+                    <p class="authors">Kravchenko, V. V., L. E. Murcia-Lozano, and Pallikarakis, N.</p>
+                    <p class="journal"><em>ArXiv preprint</em>, 2024</p>
+                    <a href="https://arxiv.org/abs/2507.16554" target="_blank">ArXiv: 2507.16554</a>
+                </div>
+
+                <!-- PRESENTATIONS & TALKS -->
+                <h3>Presentations & Talks (Selected)</h3>
+                <div class="pub-item">
+                    <h4>2025 SEMI Advanced Semiconductor Manufacturing Conference (ASMC)</h4>
+                    <p class="journal">Albany, NY, USA | May 5-8, 2025</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "DUV-Vis-IR Optical Metrology Enhancements with Machine Learning" (with J. Roberts, A. Ntargaras, K. Florios, M. Colli)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Seminar on Analysis, Differential Equations and Mathematical Physics</h4>
+                    <p class="journal">Online | March 6, 2025</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Direct and Inverse Spherically Symmetric Transmission Eigenvalue Problems: Past, Present, and Future"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>2024 IEEE International Symposium on Antennas and Propagation (AP-S)</h4>
+                    <p class="journal">Firenze (Florence), Italy | July 14-19, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "Predicting the number of line sources inside a cylinder using classification neural networks" (with A. Kalogeropoulos, N. L. Tsitsas)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>SEMICONWEST</h4>
+                    <p class="journal">San Jose, California, USA | July 9-11, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Poster:</strong> "DUV-Vis-NIR OCD Metrology utilizing Machine Learning for BCD Semiconductor Manufacturing Yield Enhancements" (with J. Roberts, J. Lam, K. Florios, M. Colli, M. Lombardo, M. Ravasio)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>International Summer School "Mathematics and Machine Learning for Image Analysis"</h4>
+                    <p class="journal">University of Bologna, Italy | June 4-12, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Poster:</strong> "Inverse line-source scattering problems in dielectric cylinders: A Divide-and-Conquer DNN approach"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Numerical Analysis Seminars, Department of Mathematics</h4>
+                    <p class="journal">University of Bologna, Italy | May 20, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Numerical solution of inverse eigenvalue and inverse source problems"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>International Conference on Frontiers of Characterization and Metrology for Nanoelectronics</h4>
+                    <p class="journal">San Jose, California, USA | April 15, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Poster:</strong> "DUV-Vis-NIR OCD Metrology for BCD Semiconductor Manufacturing Yield Enhancements" (with J. Roberts, J. Lam, K. Florios, M. Colli, M. Lombardo, M. Ravasio)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Seminars on Inverse Problems Theory and Applications</h4>
+                    <p class="journal">Online | March 26, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Exploring Inverse Eigenvalue Problems through Machine Learning"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Seminars of the Department Mathematics NTUA</h4>
+                    <p class="journal">Athens, Greece | March 22, 2024</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Solving Inverse Problems with Supervised Machine Learning Models"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>11th Applied Inverse Problems (AIP) Conference</h4>
+                    <p class="journal">Göttingen, Germany | September 4-8, 2023</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "The inverse spectral problem for a spherically symmetric refractive index using modified transmission eigenvalues" (with D. Gintides, K. Stratouras)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Math@NTUA Summer School "Mathematical Theory of Inverse Problems and Applications"</h4>
+                    <p class="journal">Athens, Greece | June 26-30, 2023</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Seminars of Industrial Mathematics - Centro de Investigación y Tecnología Matemática de Galicia</h4>
+                    <p class="journal">University of A Coruña, Spain | January 25, 2023</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Inverse eigenvalue problems for inhomogeneous media: theoretical and numerical advances"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Seminars on Inverse Problems Theory and Applications</h4>
+                    <p class="journal">Online | October 4, 2022</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Invited Talk:</strong> "Inverse Spectral Problems for classic and modified transmission eigenvalues"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Scientific Symposium of the International Union of Radio Science (URSI GASS)</h4>
+                    <p class="journal">Rome, Italy | August 28 - September 4, 2021</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "A computational approach for the inverse modified transmission eigenvalue problem" (with D. Gintides, K. Stratouras)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>10th Applied Inverse Problems (AIP) Conference</h4>
+                    <p class="journal">Grenoble, France | July 8-12, 2019</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "The Inverse ITE Problem for Discontinuous Refractive Index" (with D. Gintides)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Math@NTUA Summer School "Non-linear Partial Differential Equations"</h4>
+                    <p class="journal">Athens, Greece | June 20-24, 2017</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Researcher's Night NTUA</h4>
+                    <p class="journal">Athens, Greece | September 30, 2016</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Poster:</strong> "The reconstruction of a refractive index from transmission eigenvalues"</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>International Conference: Modern Mathematical Methods in Science and Technology (M3ST)</h4>
+                    <p class="journal">Kalamata, Greece | August 30 - September 1, 2015</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "Uniqueness theorems for the inverse transmission eigenvalue problem for a discontinuous refractive index" (with D. Gintides)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>7th International Conference Inverse Problems: Modeling and Simulation (IPMS)</h4>
+                    <p class="journal">Fethiye, Turkey | May 26-31, 2014</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Talk:</strong> "The inverse transmission eigenvalue problem for a discontinuous refractive index" (with D. Gintides)</p>
+                </div>
+
+                <div class="pub-item">
+                    <h4>Franco-German Summer School: Inverse Problems and PDEs</h4>
+                    <p class="journal">Bremen, Germany | October 7-11, 2013</p>
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-sm);"><strong>Poster:</strong> "The Inverse Transmission Eigenvalue Problem" (with D. Gintides)</p>
+                </div>
+
+                <!-- GRANTS & SCHOLARSHIPS -->
+                <h3>Research Grants & Scholarships</h3>
+                <table style="width: 100%; border-collapse: collapse; margin-top: var(--spacing-lg);">
+                    <tr style="background: var(--color-bg); border-bottom: 1px solid var(--color-border);">
+                        <td style="padding: var(--spacing-md); font-weight: 600; color: var(--color-primary);">Grant/Award</td>
+                        <td style="padding: var(--spacing-md); font-weight: 600; color: var(--color-primary);">Source</td>
+                        <td style="padding: var(--spacing-md); font-weight: 600; color: var(--color-primary);">Period</td>
+                        <td style="padding: var(--spacing-md); font-weight: 600; color: var(--color-primary);">Role</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-border);">
+                        <td style="padding: var(--spacing-md);">Application of Machine Learning to Inverse Problems (AMALIP)</td>
+                        <td style="padding: var(--spacing-md);">HPC ARIS (16th Call)</td>
+                        <td style="padding: var(--spacing-md);">06/2024-06/2025</td>
+                        <td style="padding: var(--spacing-md); font-weight: 500; color: var(--color-primary);">Principal Investigator</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--color-border);">
+                        <td style="padding: var(--spacing-md);">Direct and Inverse Spectral Problems in Scattering Theory</td>
+                        <td style="padding: var(--spacing-md);">EU/ESF (Post-Doctoral Support Program)</td>
+                        <td style="padding: var(--spacing-md);">06/2020-08/2021</td>
+                        <td style="padding: var(--spacing-md); font-weight: 500; color: var(--color-primary);">Post-Doctoral Researcher</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: var(--spacing-md);">Inverse Scattering Theory in Linear Elasticity (PEBE Program)</td>
+                        <td style="padding: var(--spacing-md);">NTUA Basic Research</td>
+                        <td style="padding: var(--spacing-md);">09/2011-11/2012</td>
+                        <td style="padding: var(--spacing-md); font-weight: 500; color: var(--color-primary);">Research Assistant</td>
+                    </tr>
+                </table>
+
+                <!-- PEER REVIEW ACTIVITY -->
+                <h3>Peer Review Activity</h3>
+                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-top: var(--spacing-lg); padding-left: var(--spacing-lg);">
+                    <li><strong>2025:</strong> Journal of Inverse and Ill-posed Problems (De Gruyter), Mathematical Reviews/MathSciNet</li>
+                    <li><strong>2024:</strong> Inverse Problems (IOP), Mathematical Reviews/MathSciNet</li>
+                    <li><strong>2023:</strong> Journal of Scientific Computing (Springer)</li>
                 </ul>
-            </div>
+            </section>
+        </div>
+    </div>
 
-            <div style="border-left: 3px solid var(--color-accent); padding-left: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
-                <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">Post-Doctoral Researcher</h3>
-                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>National Technical University of Athens</strong></p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Jun 2020 – Aug 2021</p>
-                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8;">
-                    <li>Direct and inverse scattering theory and computational methods for eigenvalue problems in nonhomogeneous metamaterial domains</li>
-                    <li>Computational work performed in MATLAB; development of numerical algorithms</li>
-                    <li>Project: "Direct and Inverse Spectral Problems in Scattering Theory" (EU/ESF funded)</li>
+    <!-- EXPERIENCE PAGE -->
+    <div id="experience" class="page">
+        <div class="container">
+            <section>
+                <h2>Experience & Education</h2>
+
+                <h3>Work Experience</h3>
+
+                <div class="exp-item">
+                    <h3>Senior Application Engineer and Data Scientist</h3>
+                    <div class="company">n&k Technology, Inc., San Jose, California, USA</div>
+                    <div class="period">Nov 2018 – Present (6+ years)</div>
+                    <ul>
+                        <li>Analyze raw reflectance/transmittance data and develop ML models using proprietary analysis software (GUI/API)</li>
+                        <li>Apply RCWA (Rigorous Coupled-Wave Analysis) and machine/statistical learning for optical semiconductor metrology</li>
+                        <li>Program in C++ and Python for data processing, automation, and model deployment</li>
+                        <li>Work on non-destructive testing of semiconductor devices; bridge theory and practical manufacturing needs</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <h3>Post-Doctoral Researcher</h3>
+                    <div class="company">National Technical University of Athens (NTUA)</div>
+                    <div class="period">Jun 2020 – Aug 2021</div>
+                    <ul>
+                        <li>Direct and inverse scattering theory and computational methods for eigenvalue problems in nonhomogeneous metamaterial domains</li>
+                        <li>Computational work performed in MATLAB; development of numerical algorithms</li>
+                        <li>Project: "Direct and Inverse Spectral Problems in Scattering Theory" (EU/ESF funded)</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <h3>Tutor in Mathematics</h3>
+                    <div class="company">Avakas, Athens, Greece</div>
+                    <div class="period">Apr 2017 – Dec 2018</div>
+                    <ul>
+                        <li>Tutor to undergraduate and postgraduate students in: Differential Equations, Mathematical Analysis, Mathematical Programming with MATLAB/Octave, Complex Analysis, Computational Methods, Numerical Analysis, Linear Algebra</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <h3>Teaching Assistant</h3>
+                    <div class="company">NTUA, School of Applied Mathematical and Physical Sciences</div>
+                    <div class="period">Oct 2012 – Apr 2017</div>
+                    <ul>
+                        <li>Teaching assistant in undergraduate Ordinary and Partial Differential Equations courses (exercises and laboratory)</li>
+                        <li>Courses: ODE (ΣΕΜΦΕ, School of Civil Engineering), PDE (ΣΕΜΦΕ, Chemical Engineering School), PDE II (ΣΕΜΦΕ)</li>
+                    </ul>
+                </div>
+
+                <h3>Education</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-lg);">
+                    <div class="exp-item">
+                        <h3>PhD in Applied Mathematics</h3>
+                        <div class="company">National Technical University of Athens (NTUA)</div>
+                        <div class="period">Sep 2012 – Apr 2017</div>
+                        <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-md);"><strong>Thesis:</strong> "The inverse spectral problem for the reconstruction of the refractive index from the interior transmission problem"</p>
+                        <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>MSc in Applied Mathematical Sciences</h3>
+                        <div class="company">NTUA</div>
+                        <div class="period">Sep 2010 – May 2012</div>
+                        <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-md);"><strong>Grade:</strong> 9.3/10 (Excellent)</p>
+                        <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Thesis:</strong> "The interior transmission problem in inverse scattering and applications"</p>
+                        <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Diploma in Applied Mathematics and Physical Sciences</h3>
+                        <div class="company">NTUA</div>
+                        <div class="period">Sep 2005 – June 2010</div>
+                        <p style="font-size: 14px; color: var(--color-text-muted); margin-top: var(--spacing-md);"><strong>Grade:</strong> 7.9/10 (Very Good)</p>
+                        <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Thesis:</strong> "Integral equations and representations in linear elasticity"</p>
+                        <p style="font-size: 14px; color: var(--color-text-muted);"><strong>Supervisor:</strong> Prof. Drossos Gintides</p>
+                    </div>
+                </div>
+
+                <h3>Awards & Scholarships</h3>
+                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-top: var(--spacing-lg); padding-left: var(--spacing-lg);">
+                    <li><strong>ELKE NTUA Scholarship (2013–2017):</strong> 4-year PhD scholarship</li>
+                    <li><strong>Thomaidio Award (2017, 2014):</strong> For publications in SCI-indexed journals (awarded twice)</li>
                 </ul>
-            </div>
+            </section>
+        </div>
+    </div>
 
-            <div style="border-left: 3px solid var(--color-accent); padding-left: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
-                <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">Tutor in Mathematics</h3>
-                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>Avakas</strong>, Athens, Greece</p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Apr 2017 – Dec 2018</p>
-                <p style="font-size: 14px; color: var(--color-text-muted);">Tutor to undergraduate and postgraduate students in: Differential Equations, Mathematical Analysis, Mathematical Programming with MATLAB/Octave, Complex Analysis, Computational Methods, Numerical Analysis, Linear Algebra</p>
-            </div>
+    <!-- SKILLS PAGE -->
+    <div id="skills" class="page">
+        <div class="container">
+            <section>
+                <h2>Skills & Expertise</h2>
 
-            <div style="border-left: 3px solid var(--color-accent); padding-left: var(--spacing-lg);">
-                <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-sm);">Teaching Assistant</h3>
-                <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"><strong>NTUA, School of Applied Mathematical and Physical Sciences</strong></p>
-                <p style="font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Oct 2012 – Apr 2017</p>
-                <p style="font-size: 14px; color: var(--color-text-muted);">Teaching assistant in undergraduate Ordinary and Partial Differential Equations courses (exercises and laboratory)</p>
-            </div>
-
-            <h3 style="color: var(--color-primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-size: 18px;">Research Grants (PI or Co-I)</h3>
-            <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8;">
-                <li><strong>16th Call HPC ARIS</strong> (Jun 2024 – Feb 2026) - PI: "Application of Machine Learning to Inverse Problems (AMALIP)"</li>
-                <li><strong>EU/ESF Researcher Support Program</strong> (Jun 2020 – Aug 2021) - Post-Doctoral Researcher: "Direct and Inverse Spectral Problems in Scattering Theory"</li>
-                <li><strong>NTUA Basic Research Program (PEBE)</strong> (Sep 2011 – Nov 2012) - Research Assistant: "Inverse Scattering Theory in Linear Elasticity"</li>
-            </ul>
-        </section>
-
-        <!-- Research Projects -->
-        <section>
-            <h2>Research Projects & Code</h2>
-            <div class="projects-grid">
-                <div class="project">
-                    <h3>ML Inverse Eigenvalue</h3>
-                    <p class="description">Machine learning models for solving inverse eigenvalue problems. Implementation of regression techniques for parameter recovery from eigenvalue spectra.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">ML</span>
-                        <span class="tag">Inverse Problems</span>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Programming Languages</h4>
+                        <ul>
+                            <li>Python (NumPy, SciPy, Pandas)</li>
+                            <li>C++ (Data processing & optimization)</li>
+                            <li>MATLAB/Octave (Numerical computation)</li>
+                            <li>Java (Software development)</li>
+                            <li>LaTeX (Academic writing)</li>
+                            <li>JavaScript/HTML/CSS (Web development)</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/npallikarakis/ML_inv_eigenvalue" class="project-link">View on GitHub →</a>
-                </div>
 
-                <div class="project">
-                    <h3>DNN Inverse Line Source</h3>
-                    <p class="description">Deep neural network approach to inverse line-source scattering in dielectric cylinders. Combines numerical methods with deep learning for electromagnetic inverse problems.</p>
-                    <div class="project-tags">
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Electromagnetics</span>
-                        <span class="tag">CNN</span>
+                    <div class="skill-category">
+                        <h4>Machine Learning & Deep Learning</h4>
+                        <ul>
+                            <li>TensorFlow/Keras</li>
+                            <li>PyTorch</li>
+                            <li>Scikit-learn</li>
+                            <li>Neural Networks & CNN</li>
+                            <li>Regression & Classification</li>
+                            <li>Model Optimization & Regularization</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/npallikarakis/DNN_inverse_line_source" class="project-link">View on GitHub →</a>
-                </div>
 
-                <div class="project">
-                    <h3>Numerical Methods for Maxwell</h3>
-                    <p class="description">Numerical computation and analysis of transmission eigenvalue problems in Maxwell equations. Implementation of spectral methods and Bessel function expansions (NSBF).</p>
-                    <div class="project-tags">
-                        <span class="tag">MATLAB</span>
-                        <span class="tag">PDEs</span>
-                        <span class="tag">Numerical Analysis</span>
+                    <div class="skill-category">
+                        <h4>Scientific & Mathematical Computing</h4>
+                        <ul>
+                            <li>Numerical Methods & PDE Solvers</li>
+                            <li>Signal Processing & Spectral Analysis</li>
+                            <li>Inverse Problems & Reconstruction</li>
+                            <li>Electromagnetic Theory</li>
+                            <li>Eigenvalue & Eigenfunction Problems</li>
+                            <li>Statistical Methods</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Domain Expertise</h4>
+                        <ul>
+                            <li>Semiconductor Metrology (7+ years)</li>
+                            <li>RCWA (Rigorous Coupled-Wave Analysis)</li>
+                            <li>Optical Measurement & Characterization</li>
+                            <li>Non-destructive Testing</li>
+                            <li>Critical Dimension (CD) Measurement</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Tools & Platforms</h4>
+                        <ul>
+                            <li>Google Colab & HPC Computing</li>
+                            <li>GitHub & Version Control</li>
+                            <li>Overleaf (LaTeX)</li>
+                            <li>Linux/Unix & Command Line</li>
+                            <li>Windows & macOS</li>
+                            <li>Microsoft Office Suite</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Languages</h4>
+                        <ul>
+                            <li>Greek (Native)</li>
+                            <li>English (B2 - FCE Cambridge, ECCE Michigan)</li>
+                            <li>Spanish (B2 - Universidade de Vigo)</li>
+                            <li>Italian (B1 - Istituto Italiano di Cultura)</li>
+                            <li>German (B1 - Zertifikat Deutsch)</li>
+                        </ul>
                     </div>
                 </div>
+            </section>
+        </div>
+    </div>
 
-                <div class="project">
-                    <h3>Computer Vision Applications</h3>
-                    <p class="description">Satellite imagery analysis and vehicle detection using CNN-based approaches. Shape recognition and reconstruction from multi-modal data.</p>
-                    <div class="project-tags">
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">Computer Vision</span>
-                        <span class="tag">Object Detection</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- LIFELONG LEARNING PAGE -->
+    <div id="learning" class="page">
+        <div class="container">
+            <section>
+                <h2>Lifelong Learning & Professional Development</h2>
 
-        <!-- Skills -->
-        <section id="skills">
-            <h2>Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <ul>
-                        <li>Python (Primary) • NumPy, SciPy, Pandas</li>
-                        <li>C++ • Data processing & optimization</li>
-                        <li>MATLAB/Octave • Numerical computation</li>
-                        <li>Java • Software development</li>
-                        <li>LaTeX • Academic writing</li>
-                        <li>JavaScript/HTML • Web development</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Machine Learning & Deep Learning</h3>
-                    <ul>
-                        <li>TensorFlow/Keras</li>
-                        <li>PyTorch</li>
-                        <li>Scikit-learn</li>
-                        <li>Neural Networks & CNN</li>
-                        <li>Regression & Classification</li>
-                        <li>Model Optimization</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Scientific & Mathematical Computing</h3>
-                    <ul>
-                        <li>Numerical Methods & PDE Solvers</li>
-                        <li>Signal Processing & Spectral Analysis</li>
-                        <li>Inverse Problems & Reconstruction</li>
-                        <li>Electromagnetic Theory</li>
-                        <li>Eigenvalue & Eigenfunction Problems</li>
-                        <li>Statistical Methods</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Domain Expertise</h3>
-                    <ul>
-                        <li>Semiconductor Metrology (7+ yrs)</li>
-                        <li>RCWA (Rigorous Coupled-Wave Analysis)</li>
-                        <li>Optical Measurement & Characterization</li>
-                        <li>Non-destructive Testing</li>
-                        <li>Critical Dimension (CD) Measurement</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Platforms</h3>
-                    <ul>
-                        <li>Google Colab • HPC Computing</li>
-                        <li>GitHub • Version Control</li>
-                        <li>Overleaf • Document Preparation</li>
-                        <li>Linux/Unix • Command Line</li>
-                        <li>Windows & macOS</li>
-                        <li>Microsoft Office Suite</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>Greek • Native</li>
-                        <li>English • B2 (FCE Cambridge, ECCE Michigan)</li>
-                        <li>Spanish • B2 (Universidade de Vigo)</li>
-                        <li>Italian • B1 (Istituto Italiano di Cultura)</li>
-                        <li>German • B1 (Zertifikat Deutsch)</li>
-                    </ul>
-                </div>
-            </div>
+                <h3>Summer Schools & Workshops</h3>
+                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; padding-left: var(--spacing-lg); margin-top: var(--spacing-lg);">
+                    <li><strong>International Summer School "Mathematics and Machine Learning for Image Analysis"</strong> – University of Bologna, Italy (June 2024)</li>
+                    <li><strong>Math@NTUA Summer School "Mathematical Theory of Inverse Problems and Applications"</strong> – Athens, Greece (June 2023)</li>
+                    <li><strong>Franco-German Summer School "Inverse Problems and PDEs"</strong> – Bremen, Germany (October 2013)</li>
+                </ul>
 
-            <h3 style="color: var(--color-primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-size: 18px;">Lifelong Learning & Professional Development</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md);">
-                <div style="background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
-                    <p style="font-weight: 500; color: var(--color-primary); margin-bottom: var(--spacing-sm);">Summer Schools (2024–2023)</p>
-                    <ul style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">
-                        <li>International Summer School "Mathematics and Machine Learning for Image Analysis" – University of Bologna (June 2024)</li>
-                        <li>Math@NTUA Summer School "Mathematical Theory of Inverse Problems and Applications" – Athens (June 2023)</li>
-                        <li>Franco-German Summer School "Inverse Problems and PDEs" – Bremen (October 2013)</li>
-                    </ul>
-                </div>
-                <div style="background: var(--color-bg); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--color-accent);">
-                    <p style="font-weight: 500; color: var(--color-primary); margin-bottom: var(--spacing-sm);">Online Courses & Certifications</p>
-                    <ul style="font-size: 13px; color: var(--color-text-muted); line-height: 1.6;">
-                        <li>Machine Learning with Python – EdX & IBM (August 2020)</li>
-                        <li>Introduction to Python for Data Science – EdX (May 2017)</li>
-                        <li>Introduction to R for Data Science – EdX (May 2017)</li>
-                    </ul>
-                </div>
-            </div>
+                <h3>Online Courses & Certifications</h3>
+                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; padding-left: var(--spacing-lg); margin-top: var(--spacing-lg);">
+                    <li><strong>Machine Learning with Python</strong> – EdX & IBM (August 2020)</li>
+                    <li><strong>Introduction to Python for Data Science</strong> – EdX (May 2017)</li>
+                    <li><strong>Introduction to R for Data Science</strong> – EdX (May 2017)</li>
+                </ul>
 
-            <h3 style="color: var(--color-primary); margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-size: 18px;">Peer Review Activity</h3>
-            <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8;">
-                <li><strong>2025:</strong> Journal of Inverse and Ill-posed Problems (De Gruyter), Mathematical Reviews/MathSciNet</li>
-                <li><strong>2024:</strong> Inverse Problems (IOP), Mathematical Reviews/MathSciNet</li>
-                <li><strong>2023:</strong> Journal of Scientific Computing (Springer)</li>
-            </ul>
-        </section>
+                <h3>Recent Seminars Attended</h3>
+                <ul style="font-size: 14px; color: var(--color-text-muted); line-height: 1.8; padding-left: var(--spacing-lg); margin-top: var(--spacing-lg);">
+                    <li>Numerical Analysis Seminars, UniBo (2024)</li>
+                    <li>Department Mathematics NTUA Seminars (2024)</li>
+                    <li>Seminars on Inverse Problems Theory and Applications (2022-2024, Online)</li>
+                    <li>International Symposia in Antennas, Propagation, and Applied Inverse Problems (2019-2024)</li>
+                </ul>
+            </section>
+        </div>
+    </div>
 
-        <!-- Contact -->
-        <section id="contact" class="contact">
-            <h2>Get In Touch</h2>
-            <p>I'm interested in collaborations, research opportunities, and discussions on inverse problems, deep learning, and scientific computing.</p>
-            <div class="contact-buttons">
-                <a href="mailto:npall@central.ntua.gr" class="btn">Email Me</a>
-                <a href="https://github.com/npallikarakis" class="btn">GitHub</a>
-                <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" class="btn">ResearchGate</a>
-            </div>
-        </section>
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="container">
+            <section class="contact">
+                <h2>Get In Touch</h2>
+                <p style="margin-bottom: var(--spacing-lg);">I'm interested in collaborations, research opportunities, and discussions on inverse problems, deep learning, and scientific computing.</p>
+                <div class="contact-buttons">
+                    <a href="mailto:npall@central.ntua.gr" class="btn">Email (NTUA)</a>
+                    <a href="mailto:pallikarakis.n@gmail.com" class="btn">Email (Personal)</a>
+                    <a href="https://github.com/npallikarakis" class="btn">GitHub</a>
+                    <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" class="btn">ResearchGate</a>
+                    <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" class="btn">LinkedIn</a>
+                </div>
+            </section>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md);">
             <div>
-                <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" style="color: var(--color-text-muted);">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" style="color: var(--color-text-muted);">ResearchGate</a> | <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" style="color: var(--color-text-muted);">LinkedIn</a></p>
+                <p>&copy; 2025 Nikolaos Pallikarakis. All rights reserved. | <a href="https://github.com/npallikarakis" target="_blank">GitHub</a> | <a href="https://www.researchgate.net/profile/Nikolaos-Pallikarakis" target="_blank">ResearchGate</a> | <a href="https://www.linkedin.com/in/nikolaos-pallikarakis-b2919495/" target="_blank">LinkedIn</a></p>
             </div>
-            <div style="font-size: 12px; color: var(--color-text-muted);">
+            <div style="font-size: 12px;">
                 Visitors: <span id="visitor-count" style="font-weight: bold;">--</span> | <span id="visitor-country" style="font-weight: bold;">--</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Visitor Counter with Country Detection
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Update navigation button active state
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Set active button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Visitor Counter
         async function loadVisitorCounter() {
             try {
-                // Get visitor count from CounterAPI
                 const response = await fetch('https://api.countapi.xyz/hit/npallikarakis.github.io/visits');
                 const data = await response.json();
                 document.getElementById('visitor-count').textContent = data.value;
 
-                // Get visitor country from IP geolocation
                 const geoResponse = await fetch('https://ipapi.co/json/');
                 const geoData = await geoResponse.json();
                 const country = geoData.country_name || geoData.country || 'Unknown';
@@ -836,7 +1049,6 @@
             }
         }
 
-        // Load counter when page loads
         window.addEventListener('load', loadVisitorCounter);
     </script>
 </body>
