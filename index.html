@@ -397,7 +397,7 @@
         footer {
             background: var(--color-surface);
             border-top: 1px solid var(--color-border);
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: 4px var(--spacing-lg);
             text-align: left;
             color: var(--color-text-muted);
             font-size: 13px;
@@ -409,9 +409,16 @@
             text-decoration: none;
         }
 
+        footer p {
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1.2;
+        }
+
         footer a:hover {
             color: var(--color-accent);
         }
+
 
         /* About highlights */
         .highlights {
