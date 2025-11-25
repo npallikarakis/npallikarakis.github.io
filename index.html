@@ -521,6 +521,7 @@
                 <li><button class="nav-btn" onclick="showPage('education')">Education</button></li>
                 <li><button class="nav-btn" onclick="showPage('skills')">Skills</button></li>
                 <li><button class="nav-btn" onclick="showPage('learning')">Lifelong Learning</button></li>
+                <li><button class="nav-btn" onclick="showPage('blog')">Blog</button></li> 
                 <li><button class="nav-btn" onclick="showPage('contact')">Contact</button></li>
             </ul>
         </div>
@@ -1140,6 +1141,44 @@
         </div>
     </div>
 
+    <!-- BLOG PAGE -->
+    <div id="blog" class="page">
+        <div class="container">
+            <section>
+                <h2>Blog & Articles</h2>
+                <p style="font-size: 16px; line-height: 1.8; color: var(--color-text-muted); margin-bottom: var(--spacing-lg);">
+                    Read my articles for insights into mathematics and practical applications.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-lg);">
+                    
+                    <div class="pub-item" style="padding: var(--spacing-lg);">
+                        <h4>Direct and Inverse Eigenvalue Problems — a gentle introduction</h4>
+                        <p class="authors" style="margin-top: var(--spacing-md);">An introduction to eigenvalue theory, direct problems, and inverse reconstruction methods</p>
+                        <p class="journal" style="margin-top: var(--spacing-sm); margin-bottom: var(--spacing-md);">Medium · <span style="color: var(--color-accent); font-weight: 500;">2024</span></p>
+                        <a href="https://medium.com/@pallikarakis.n/direct-and-inverse-eigenvalue-problems-a-gentle-introduction-15d441482bbd" target="_blank">Read Article →</a>
+                    </div>
+
+                    <div class="pub-item" style="padding: var(--spacing-lg);">
+                        <h4>Numerical solution of the Sturm-Liouville eigenvalue problem — matslise (MATLAB) and pyslise (Python) solvers</h4>
+                        <p class="authors" style="margin-top: var(--spacing-md);">Practical guide to solving Sturm-Liouville problems numerically using specialized libraries and tools</p>
+                        <p class="journal" style="margin-top: var(--spacing-sm); margin-bottom: var(--spacing-md);">Medium · <span style="color: var(--color-accent); font-weight: 500;">2024</span></p>
+                        <a href="https://medium.com/@pallikarakis.n/numerical-solution-of-the-sturm-liouville-eigenvalue-problem-matslise-matlab-and-pyslise-a286166bd9d0" target="_blank">Read Article →</a>
+                    </div>
+
+                </div>
+
+                <div style="background: var(--color-bg); padding: var(--spacing-lg); border-radius: 8px; margin-top: var(--spacing-lg); border-left: 4px solid var(--color-accent);">
+                    <p style="font-size: 14px; color: var(--color-text-muted); margin: 0;">
+                        <strong>Follow me on Medium:</strong> <a href="https://medium.com/@pallikarakis.n" target="_blank" style="color: var(--color-accent); text-decoration: none; font-weight: 500;">@pallikarakis.n</a> for more articles on inverse problems, deep learning, and computational mathematics.
+                    </p>
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+    
     <!-- CONTACT PAGE -->
     <div id="contact" class="page">
         <div class="container">
